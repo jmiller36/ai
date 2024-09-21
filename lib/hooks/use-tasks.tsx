@@ -18,7 +18,7 @@ const TasksContext = createContext<TasksContextType | undefined>(undefined);
 
 export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>(defaultTasks);
-  const [problems, setProblems] = useState<Problem[]>([]);
+  const [problem, setProblem] = useState<Problem>({problemText: "", explanation: "", answer: ""});
 
   useCopilotAction({
     name: "addProblem",
@@ -109,7 +109,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const addProblem = (problemText: string, explanation: string, answer: string) => {
-    setProblems([...problems, {problemText: problemText, explanation: explanation, answer: answer}]);
+    setProblem({problemText: problemText, explanation: explanation, answer: answer});
     alert(`addProblem called with problem ${problemText}`);
   }
 
