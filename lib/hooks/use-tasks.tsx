@@ -151,6 +151,10 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const deleteTask = (id: number) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
+
+  const setUserAnswer = () => { // TO-DO
+    
+  };
   
   return (
     <TasksContext.Provider value={{ problem, tasks, addProblem, addTask, setTaskStatus, deleteTask }}>

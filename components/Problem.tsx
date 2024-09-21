@@ -16,10 +16,10 @@ import {
 
 export const Problem = () => {
     const { problem } = useTasks();
-    const [ userAnswer, setUserAnswer ] = React.useState<string>('');
+    const [ userAnswer, setUserAnswer ] = React.useState<string>('')
 
     const handleSubmit = () => {
-
+        setUserAnswer(userAnswer)
     };
 
     return (
