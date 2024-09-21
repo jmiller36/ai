@@ -6,37 +6,47 @@ import { cn } from "@/lib/utils";
 import { useTasks } from "@/lib/hooks/use-tasks";
 import { motion } from "framer-motion";
 import { TaskStatus, type Task } from "@/lib/tasks.types";
+import React from 'react';
+import {
+  Container,
+  Typography,
+  TextField,
+  Paper,
+} from '@mui/material';
 
-export function Problem({ task: { id, title, status } }: { task: Task }) {
-  const { problem } = useTasks();
+const Problem = () => {
+    const { problem } = useTasks();
 
-  return (
-    <motion.div
-      key={`${id}_${status}`}
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      className="flex items-center gap-4 p-2 rounded-md bg-muted"
-    >
-      <Checkbox
-        id={`task_${id}`}
-        onClick={() => {}}
-        checked={status === TaskStatus.done}
-      />
-      <div className="text-sm text-neutral-500 font-medium">TASK-{id}</div>
-      <Label
-        htmlFor={`task_${id}`}
-        className={cn(
-          "flex-1 text-sm text-muted-foreground",
-          status === TaskStatus.done && "line-through"
-        )}
-      >
-        {title}
-      </Label>
-      <Button variant="ghost" size="sm" onClick={() => {}}>
-        <TrashIcon className="w-4 h-4" />
-        <span className="sr-only">Delete</span>
-      </Button>
-    </motion.div>
-  );
-}
+    return (
+        <Container maxWidth="sm">
+        <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px' }}>
+            <Typography variant="h5" component="h2" gutterBottom>
+            Problem Statement
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+            {problem.problemText}
+            </Typography>
+
+            <TextField
+            variant="outlined"
+            multiline
+            rows={4}
+            placeholder="Write your answer here..."
+            fullWidth
+            style={{ marginBottom: '20px' }}
+            />
+
+            <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            style={{ padding: '10px' }}
+            >
+            Submit
+            </Button>
+        </Paper>
+        </Container>
+    );
+    };
+
+    export default ProblemSolver;
