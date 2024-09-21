@@ -8,3 +8,7 @@ export enum TaskStatus {
   todo = "todo",
   done = "done",
 }
+
+export interface TopicQuestions {
+  [topic: string]: string[];
+}
