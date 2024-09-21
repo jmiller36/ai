@@ -14,11 +14,16 @@ import {
   Paper,
 } from '@mui/material';
 
-const Problem = () => {
+export const Problem = () => {
     const { problem } = useTasks();
+    const [ userAnswer, setUserAnswer ] = React.useState<string>('');
+
+    const handleSubmit = () => {
+
+    };
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" className="flex items-center gap-4 p-2 rounded-md bg-muted">
         <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px' }}>
             <Typography variant="h5" component="h2" gutterBottom>
             Problem Statement
@@ -41,6 +46,7 @@ const Problem = () => {
             color="primary"
             fullWidth
             style={{ padding: '10px' }}
+            onClick={() => handleSubmit()}
             >
             Submit
             </Button>
