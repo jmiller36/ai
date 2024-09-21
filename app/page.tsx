@@ -4,6 +4,7 @@ import { TasksList } from "@/components/TasksList";
 import { TasksProvider } from "@/lib/hooks/use-tasks";
 import { CopilotKit } from "@copilotkit/react-core";
 import { CopilotPopup } from "@copilotkit/react-ui";
+import { Problem } from "@/components/Problem";
 import "@copilotkit/react-ui/styles.css";
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
     <>
       <CopilotKit runtimeUrl="/api/copilotkit">
         <TasksProvider>
-          <TasksList />
+          <Problem />
         </TasksProvider>
         <CopilotPopup />
       </CopilotKit>
