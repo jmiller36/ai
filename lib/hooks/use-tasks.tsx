@@ -19,7 +19,7 @@ const TasksContext = createContext<TasksContextType | undefined>(undefined);
 
 export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>(defaultTasks);
-  const [problem, setProblem] = useState<Problem>({problemText: "", explanation: "", answer: ""});
+  const [problem, setProblem] = useState<Problem>({problemText: "", explanation: "", answer: "", status: ProblemStatus.todo});
 
   useCopilotAction({
     name: "addProblem",
@@ -87,25 +87,18 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   });
 
   // useCopilotAction({
-  //   name: "setProblemStatus",
-  //   description: "Sets the status of a problem",
+  //   name: "evaluate",
+  //   description: "Evaluate the answer to the current problem",
   //   parameters: [
   //     {
-  //       name: "id",
-  //       type: "number",
-  //       description: "The id of the problem",
-  //       required: true,
-  //     },
-  //     {
-  //       name: "status",
+  //       name: "answer",
   //       type: "string",
-  //       description: "The status of the problem",
-  //       enum: Object.values(ProblemStatus),
+  //       description: "The answer to the problem",
   //       required: true,
   //     },
   //   ],
-  //   handler: ({ id, status }) => {
-  //     setProblemStatus(id, status);
+  //   handler: ({ problemText, answer }) => {
+  //     evaluate(problemText, answer);
   //   }
   // });
 
@@ -137,6 +130,11 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     alert(`addProblem called with problem ${problemText}`);
   }
 
+  // const evaluate = (problem: string, answer: string) => {
+  //   setAnswer()
+  //   setTasks(tasks.filter((task) => task.id !== id));
+  // };
+
   const addTask = (title: string) => {
     setTasks([...tasks, { id: nextId++, title, status: TaskStatus.todo }]);
   };
@@ -148,14 +146,6 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
       )
     );
   };
-
-  // const setProblemStatus = (id: number, status: ProblemStatus) => {
-  //   setProblems(
-  //     problems.map((problem) =>
-  //       problem.id === id ? { ...problem, status } : problem
-  //     )
-  //   );
-  // };
 
   const deleteTask = (id: number) => {
     setTasks(tasks.filter((task) => task.id !== id));
