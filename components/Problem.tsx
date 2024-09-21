@@ -16,6 +16,11 @@ import {
 
 export const Problem = () => {
     const { problem } = useTasks();
+    const [ userAnswer, setUserAnswer ] = React.useState<string>('');
+
+    const handleSubmit = () => {
+
+    };
 
     return (
         <Container maxWidth="sm" className="flex items-center gap-4 p-2 rounded-md bg-muted">
@@ -41,6 +46,7 @@ export const Problem = () => {
             color="primary"
             fullWidth
             style={{ padding: '10px' }}
+            onClick={() => handleSubmit()}
             >
             Submit
             </Button>
