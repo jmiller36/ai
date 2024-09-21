@@ -49,4 +49,4 @@ const Problem = () => {
     );
     };
 
-    export default ProblemSolver;
+    export default Problem;
