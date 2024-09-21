@@ -133,6 +133,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
 
   const addProblem = (problemText: string, explanation: string, answer: string) => {
     setProblems([...problems, {problemText: problemText, explanation: explanation, answer: answer}]);
+    alert(`addProblem called with problem ${problemText}`);
   }
 
   const addTask = (title: string) => {
