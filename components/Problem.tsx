@@ -14,7 +14,7 @@ import {
   Paper,
 } from '@mui/material';
 
-const Problem = () => {
+export const Problem = () => {
     const { problem } = useTasks();
 
     return (
