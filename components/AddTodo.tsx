@@ -23,7 +23,7 @@ export function AddTodo() {
           className="flex-1 mr-2 bg-muted text-muted-foreground rounded-md px-4 py-2"
         />
         <Button type="submit" disabled={!title} onClick={handleAddTask}>
-          Add
+          Submit
         </Button>
       </div>
     </form>
