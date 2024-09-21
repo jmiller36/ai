@@ -9,7 +9,7 @@ let nextId = defaultTasks.length + 1;
 type TasksContextType = {
   problem: Problem;
   tasks: Task[];
-  addProblem: (problemText: string, explanation: string, answer: string) => void;
+  addProblem: (problemText: string, explanation: string, answer: string, status: ProblemStatus) => void;
   addTask: (title: string) => void;
   setTaskStatus: (id: number, status: TaskStatus) => void;
   deleteTask: (id: number) => void;
@@ -125,8 +125,8 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     }
   });
 
-  const addProblem = (problemText: string, explanation: string, answer: string) => {
-    setProblem({problemText: problemText, explanation: explanation, answer: answer});
+  const addProblem = (problemText: string, explanation: string, answer: string, status: ProblemStatus) => {
+    setProblem({problemText: problemText, explanation: explanation, answer: answer, status: status});
     alert(`addProblem called with problem ${problemText}`);
   }
 
