@@ -2,6 +2,7 @@ import { useCopilotAction, useCopilotReadable } from "@copilotkit/react-core";
 import { createContext, useContext, useState, ReactNode } from "react";
 import { defaultTasks } from "../default-tasks";
 import { Task, TaskStatus } from "../tasks.types";
+import { Problem, ProblemStatus } from "../problems.types";
 
 let nextId = defaultTasks.length + 1;
 
@@ -10,12 +11,42 @@ type TasksContextType = {
   addTask: (title: string) => void;
   setTaskStatus: (id: number, status: TaskStatus) => void;
   deleteTask: (id: number) => void;
+  addProblem: (problemText: string, explanation: string, answer: string) => void;
 };
 
 const TasksContext = createContext<TasksContextType | undefined>(undefined);
 
 export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>(defaultTasks);
+  const [problems, setProblems] = useState<Problem[]>([]);
+
+  useCopilotAction({
+    name: "addProblem",
+    description: "Generates a question and answer",
+    parameters: [
+      {
+        name: "problemText",
+        type: "string",
+        description: "The problem statement",
+        required: true
+      },
+      {
+        name: "explanation",
+        type: "string",
+        description: "An explanation of the solution to the problem described in problemText",
+        required: true
+      },
+      {
+        name: "answer",
+        type: "string",
+        description: "the correct answer to the problem in problemText",
+        required: true
+      }
+    ],
+    handler: ({ problemText, explanation, answer}) => {
+      addProblem(problemText, explanation, answer);
+    }
+  })
 
   useCopilotReadable({
     description: "The state of the todo list",
@@ -76,6 +107,10 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
       setTaskStatus(id, status);
     }
   });
+
+  const addProblem = (problemText: string, explanation: string, answer: string) => {
+    setProblems([...problems, {problemText: problemText, explanation: explanation, answer: answer}]);
+  }
 
   const addTask = (title: string) => {
     setTasks([...tasks, { id: nextId++, title, status: TaskStatus.todo }]);
