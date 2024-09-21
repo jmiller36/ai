@@ -7,11 +7,12 @@ import { Problem, ProblemStatus } from "../problems.types";
 let nextId = defaultTasks.length + 1;
 
 type TasksContextType = {
+  problem: Problem;
   tasks: Task[];
+  addProblem: (problemText: string, explanation: string, answer: string) => void;
   addTask: (title: string) => void;
   setTaskStatus: (id: number, status: TaskStatus) => void;
   deleteTask: (id: number) => void;
-  addProblem: (problemText: string, explanation: string, answer: string) => void;
 };
 
 const TasksContext = createContext<TasksContextType | undefined>(undefined);
@@ -161,7 +162,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   };
   
   return (
-    <TasksContext.Provider value={{ tasks, addTask, setTaskStatus, deleteTask }}>
+    <TasksContext.Provider value={{ problem, tasks, addProblem, addTask, setTaskStatus, deleteTask }}>
       {children}
     </TasksContext.Provider>
   );
