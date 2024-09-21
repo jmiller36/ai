@@ -85,6 +85,29 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     }
   });
 
+  // useCopilotAction({
+  //   name: "setProblemStatus",
+  //   description: "Sets the status of a problem",
+  //   parameters: [
+  //     {
+  //       name: "id",
+  //       type: "number",
+  //       description: "The id of the problem",
+  //       required: true,
+  //     },
+  //     {
+  //       name: "status",
+  //       type: "string",
+  //       description: "The status of the problem",
+  //       enum: Object.values(ProblemStatus),
+  //       required: true,
+  //     },
+  //   ],
+  //   handler: ({ id, status }) => {
+  //     setProblemStatus(id, status);
+  //   }
+  // });
+
   useCopilotAction({
     name: "setTaskStatus",
     description: "Sets the status of a task",
@@ -124,6 +147,14 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
       )
     );
   };
+
+  // const setProblemStatus = (id: number, status: ProblemStatus) => {
+  //   setProblems(
+  //     problems.map((problem) =>
+  //       problem.id === id ? { ...problem, status } : problem
+  //     )
+  //   );
+  // };
 
   const deleteTask = (id: number) => {
     setTasks(tasks.filter((task) => task.id !== id));
