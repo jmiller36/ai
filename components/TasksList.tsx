@@ -11,7 +11,7 @@ export function TasksList() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-8 md:p-24">
       <div className="flex flex-col gap-4 min-w-full md:min-w-[500px]">
-        <h1 className="text-2xl font-bold">✍️ My Todos</h1>
+        <h1 className="text-2xl font-bold">Practice Problems</h1>
         <AddTodo />
 
         <AnimatePresence>
