@@ -11,7 +11,7 @@ type TasksContextType = {
   tasks: Task[];
   addProblem: (problemText: string, explanation: string, answer: string, status: ProblemStatus) => void;
   addTask: (title: string) => void;
-  setProblem: (explanation: string, answer: string, status: ProblemStatus) => void;
+  setProblem: (problem: Problem) => void;
   setTaskStatus: (id: number, status: TaskStatus) => void;
   deleteTask: (id: number) => void;
 };
@@ -20,7 +20,7 @@ const TasksContext = createContext<TasksContextType | undefined>(undefined);
 
 export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>(defaultTasks);
-  const [problem, setProblem] = useState<Problem>({problemText: "", explanation: "", answer: "", status: ProblemStatus.todo});
+  const [problem, setProblem] = useState<Problem>({text: "", explanation: "", answer: "", status: ProblemStatus.inProgress} as Problem);
 
   useCopilotAction({
     name: "addProblem",
@@ -149,7 +149,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const addProblem = (problemText: string, explanation: string, answer: string, status: ProblemStatus) => {
-    setProblem({problemText: problemText, explanation: explanation, answer: answer, status: status});
+    //setProblem({problemText: problemText, explanation: explanation, answer: answer, status: status} as Problem);
     alert(`addProblem called with problem ${problemText}`);
   }
 
@@ -185,7 +185,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   };
   
   return (
-    <TasksContext.Provider value={{ problem, tasks, addProblem, addTask, setTaskStatus, deleteTask }}>
+    <TasksContext.Provider value={{ problem, tasks, setProblem, addProblem, addTask, setTaskStatus, deleteTask }}>
       {children}
     </TasksContext.Provider>
   );
