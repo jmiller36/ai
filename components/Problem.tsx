@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { useApp, useTasks } from "@/lib/hooks/use-tasks";
+import { ProblemStatus as ProblemStatus, useApp, useTasks, type aProblem as aProblem } from "@/lib/hooks/use-tasks";
 import React, { useEffect, useState } from 'react';
 import { question_bank } from "./resources/problems";
-import { ProblemStatus, type Problem as ProblemType } from "@/lib/problems.types";
 import { CopilotTask, useCopilotContext, useCopilotReadable, useCopilotAction } from "@copilotkit/react-core";
 import { CopilotTextarea } from "@copilotkit/react-textarea";
 import {
@@ -286,11 +285,24 @@ export function Problem() {
     // }
 
     const evaluateAnswer = (correctness: boolean, description: string) => {
+        var updatedStatus: ProblemStatus = ProblemStatus.inProgress;
         if (!correctness) {
             setCurrExplanation(description)
+            updatedStatus = ProblemStatus.incorrect;
         } else {
             setCorrectness(true)
+            updatedStatus = ProblemStatus.correct;
         }
+
+        // update current problem with the updated status
+        const updatedProblem: aProblem = {
+            question: currProblem.question,
+            topic: currProblem.topic,
+            answer: currProblem.answer,
+            status: updatedStatus
+        }
+        alert(updatedStatus);
+        setCurrProblem(updatedProblem)
     }
 
     const handleSubmit = () => {

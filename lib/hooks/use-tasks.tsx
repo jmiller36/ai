@@ -3,7 +3,7 @@ import { useCopilotAction, useCopilotReadable } from "@copilotkit/react-core";
 import { createContext, useContext, useState, ReactNode } from "react";
 import { defaultTasks } from "../default-tasks";
 import { Task, TaskStatus } from "../tasks.types";
-import { Problem, ProblemStatus } from "../problems.types";
+import { Problem } from "../problems.types";
 import { defaultProblems } from "../default-problems";
 
 let nextId = defaultTasks.length + 1;
@@ -22,7 +22,14 @@ export type aProblem = {
     question: string;
     topic: string;
     answer: string;
+    status: ProblemStatus;
 }
+
+export enum ProblemStatus {
+    inProgress = "inProgress",
+    correct = "correct",
+    incorrect = "incorrect"
+  }
 
 type AppContextType = {
     aproblemSet: aProblem[];
@@ -246,6 +253,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
                         name: "answer",
                         type: "string",
                         description: "The answer to the problem",
+                    },
+                    {
+                        name: "status",
+                        type: "ProblemStatus",
+                        description: "The current states to the problem. Initially, it is set as inProgress",
                     },
                     ]
             },
