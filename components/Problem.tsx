@@ -268,6 +268,7 @@ export function Problem() {
                 textareaPurpose: "text that displays the user's current answer", chatApiConfigs: {}
             }}></CopilotTextarea> */}
             {/* <Button onClick={}>Submit</Button> */}
+            <h1 className="text-2xl font-bold">Answer</h1>
             <Input
                 value={currAnswer}
                 onChange={(e) => setCurrAnswer(e.target.value)}
