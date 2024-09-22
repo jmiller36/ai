@@ -123,6 +123,7 @@ export function Problem({problemStatus, setProblemStatus }) {
                 rows={4}
                 placeholder="Write your answer here..."
                 fullWidth
+                style={{ padding: '10px', width: '100%' }}
                 value={userAnswer}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setUserAnswer(e.target.value)} // Explicit typing for e
                 style={{ marginBottom: '20px' }}
@@ -131,8 +132,7 @@ export function Problem({problemStatus, setProblemStatus }) {
                 <Button
                 variant="contained"
                 color="primary"
-                fullWidth
-                style={{ padding: '10px' }}
+                style={{ padding: '10px', width: '100%' }}
                 onClick={() => handleSubmit()}
                 >
                 Submit
