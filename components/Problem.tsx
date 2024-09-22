@@ -14,6 +14,8 @@ import {
 export function Problem({problemStatus, setProblemStatus }) {
     const { problem, setProblem } = useTasks();
     const [ userAnswer, setUserAnswer ] = React.useState<string>('');
+    const context = useCopilotContext();
+
     const problems: ProblemType[] = Object.entries(question_bank).flatMap(([topic, problems]) =>
         problems.map(problem => ({
             ...problem,
@@ -28,21 +30,20 @@ export function Problem({problemStatus, setProblemStatus }) {
         () => setProblem(problems[0]), []
     );
     
-    const context = useCopilotContext();
     const evaluateAnswerTask = new CopilotTask({
         instructions: "Evaluate whether the user's answer to the problem, stored in userAnswer, is correct. Set the value of problemStatus to ProblemStatus.correct using setProblemStatus(ProblemStatus.correct) if the answer is correct, and ProblemStatus.incorrect using setProblemStatus(ProblemStatus.incorrect) if it is incorrect.",
         actions: [
             {
                 name: "updateProblemStatus",
                 description: "set the problem status based on whether the answer is correct or incorrect",
-                argumentAnnotations: [
+                parameters: [
                     {
                         name: "isCorrect",
                         description: "true if the answer to the problem is correct, and false otherwise",
                         type: "boolean",
                         required: true
                     }],
-                implementation: async (isCorrect: boolean) => {
+                handler: async ( {isCorrect} ) => {
                     isCorrect ? setProblemStatus(ProblemStatus.correct) : setProblemStatus(ProblemStatus.incorrect);
                 }
             }
@@ -55,7 +56,7 @@ export function Problem({problemStatus, setProblemStatus }) {
             {
                 name: "generateProblem",
                 description: "generate a follow-up problem",
-                argumentAnnotations: [
+                parameters: [
                     {
                         name: "generatedProblem",
                         type: "Problem",
@@ -63,16 +64,22 @@ export function Problem({problemStatus, setProblemStatus }) {
                         required: true,
                     },
                 ],
-                implementation: async (generatedProblem: ProblemType) => {
+                handler: async ( {generatedProblem} ) => {
                     setProblem(generatedProblem)
-                },
+                }
             }
-        ]
-    });
+        ],
+    });    
+ 
 
     const handleSubmit = async () => {
         alert(`userAnswer was passed in as: ${userAnswer}`);
-        await evaluateAnswerTask.run(context, "updateProblemStatus");
+        await evaluateAnswerTask.run(context, {
+            tool_choice: {
+                type: "function",
+                function: { name: "updateProblemStatus" }
+            }
+        });
     };
 
     const handleNext = async (wasCorrect: boolean) => {
@@ -82,8 +89,12 @@ export function Problem({problemStatus, setProblemStatus }) {
             setProblem(newProblem);
             setProblemStatus(ProblemStatus.inProgress);
         } else {
-            // TODO generate problem task run, choose next problem
-            await generateProblemTask.run(context, "generateProblem")
+            await generateProblemTask.run(context, {
+                tool_choice: {
+                    type: "function",
+                    function: { name: "generateProblem" }
+                }
+            });
         }
     }
 
