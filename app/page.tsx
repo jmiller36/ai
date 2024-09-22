@@ -18,10 +18,9 @@ export default function Home() {
       <CopilotKit runtimeUrl="/api/copilotkit">
         <AppProvider>
           <Routes>
-            <Route path="/teacher" component={Teacher} />
-            <Route path="/" exact>
-              <Problem /> {/* Default route to the Problem component */}
-            </Route>
+            <Route path="/student" element={<Problem />} />
+            <Route path="/teacher" element={<Teacher />} />
+            <Route path="/" element={<Problem />} /> {/* Default route to the Problem component */}
           </Routes>
         </AppProvider>
         <CopilotPopup />
