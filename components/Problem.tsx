@@ -52,14 +52,14 @@ export function Problem({problemStatus, setProblemStatus }) {
                 description: "generate a follow-up problem",
                 argumentAnnotations: [
                     {
-                        name: "nextProblem",
+                        name: "newProblem",
                         type: "Problem",
                         description: "The follow-up problem that will be asked next.",
                         required: true,
                     },
                 ],
-                implementation: async (nextProblem: ProblemType) => {
-                    setProblem(nextProblem)
+                implementation: async (newProblem: ProblemType) => {
+                    setProblem(newProblem)
                 },
             }
         ]
