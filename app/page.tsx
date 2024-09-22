@@ -27,8 +27,8 @@ export default function Home() {
         <AppProvider>
         {/* Conditionally render Problem or Teacher based on the route */}
         {window.location.pathname === '/teacher' ? <Teacher /> : <Problem />}
-        </AppProvider>
         <CopilotPopup />
+        </AppProvider>
       </CopilotKit>}
     </>
   );
