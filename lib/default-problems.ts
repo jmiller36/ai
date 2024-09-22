@@ -2,8 +2,8 @@ import { aProblem } from "./hooks/use-tasks";
 
 export const defaultProblems: aProblem[] = [
     {
-        question: "What did the fox say?",
-        topic: "Music",
-        answer: "ring ding ding"
+        question: "The Industrial Revolution marked a transition from what economy?",
+        topic: "American history",
+        answer: "agricultural"
       },
 ]
