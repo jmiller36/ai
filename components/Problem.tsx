@@ -14,9 +14,16 @@ import {
 export function Problem({problemStatus, setProblemStatus }) {
     const [ problem, setProblem ] = React.useState<string>('');
     const [ userAnswer, setUserAnswer ] = React.useState<string>('');
-    const problems: ProblemType[] = [
-
-    ]
+    const problems: ProblemType[] = Object.entries(question_bank).flatMap(([topic, problems]) =>
+        problems.map(problem => ({
+            ...problem,
+            topic,
+            userAnswer: '',
+            status: 'todo'
+        }))
+    );
+    console.log(problems[0]);
+    
     const context = useCopilotContext();
     const evaluateAnswerTask = new CopilotTask({
         instructions: "Evaluate whether the user's answer to the problem, stored in userAnswer, is correct. Set the value of problemStatus to ProblemStatus.correct using setProblemStatus(ProblemStatus.correct) if the answer is correct, and ProblemStatus.incorrect using setProblemStatus(ProblemStatus.incorrect) if it is incorrect.",
