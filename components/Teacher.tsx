@@ -27,6 +27,7 @@ const Topic = ({ problem }) => {
       <p><strong>Question:</strong> {problem.question}</p>
       <p><strong>Topic:</strong> {problem.topic}</p>
       <p><strong>Answer:</strong> {problem.answer}</p>
+      <p><strong>Status:</strong> {problem.status}</p>
     </motion.div>
   );
 };
@@ -38,7 +39,7 @@ export function Teacher() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-8 md:p-24">
       <div className="flex flex-col gap-4 min-w-full md:min-w-[500px]">
-        <h1 className="text-2xl font-bold">Teaching Topics</h1>
+        <h1 className="text-2xl font-bold">Teaching Problems</h1>
 
         <AnimatePresence>
           {aproblemSet // Iterate over the problems from aproblemSet
@@ -46,8 +47,6 @@ export function Teacher() {
               <Topic key={index} problem={problem} />
             ))}
         </AnimatePresence>
-
-        {/* Optionally add a button or form to add new topics */}
       </div>
     </main>
   );
