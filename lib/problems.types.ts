@@ -1,10 +1,9 @@
 export type Problem = {
   topic: string,
-  text: string,
+  question: string,
   explanation: string,
   answer: string,
-  userAnswer: string,
-  status: ProblemStatus
+  userAnswer: string
 };
   
 export enum ProblemStatus {

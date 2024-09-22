@@ -18,8 +18,7 @@ export function Problem({problemStatus, setProblemStatus }) {
         problems.map(problem => ({
             ...problem,
             topic,
-            userAnswer: '',
-            status: 'todo'
+            userAnswer: ''
         }))
     );
     console.log(problems[0]);
