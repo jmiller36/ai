@@ -25,7 +25,7 @@ export function Problem({problemStatus, setProblemStatus }) {
     console.log(problems[0]);
 
     React.useEffect(
-        () => setProblem(problems[0])
+        () => setProblem(problems[0]), []
     );
     
     const context = useCopilotContext();
