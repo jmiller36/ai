@@ -20,7 +20,7 @@ export default function Home() {
           <Routes>
             <Route path="/student" element={<Problem />} />
             <Route path="/teacher" element={<Teacher />} />
-            <Route path="/" element={<Problem />} /> {/* Default route to the Problem component */}
+            <Route path="/" element={<Teacher />} /> {/* Default route to the Problem component */}
           </Routes>
         </AppProvider>
         <CopilotPopup />
