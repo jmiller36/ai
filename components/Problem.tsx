@@ -12,6 +12,8 @@ import {
     Paper,
 } from '@mui/material';
 import Explanation from "./Explanation";
+import { useCopilotChat } from "@copilotkit/react-core";
+import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import { Input } from "./ui/input";
 
 // export function Problem({problemStatus, setProblemStatus }) {
@@ -208,6 +210,10 @@ export function Problem() {
     const [currExplanation, setCurrExplanation] = useState<string>("")
     const listQuestions = aproblemSet.map(problem => problem.question)
 
+    const [inProgress, setInProgress] = useState<boolean>(true);
+
+    const { appendMessage } = useCopilotChat();
+
     useEffect(() => {
         if (aproblemSet && aproblemSet.length > 0) {
             setCurrProblem(aproblemSet[0])
@@ -216,6 +222,7 @@ export function Problem() {
 
     const buttonClick = () => {
         setCorrectness(false)
+        setInProgress(true);
         if (aproblemSet && aproblemSet.length > 0) {
             aproblemSet.shift()
             setCurrProblem(aproblemSet[0])
@@ -258,6 +265,16 @@ export function Problem() {
         }
     }
 
+    const handleSubmit = () => {
+        appendMessage(
+            new TextMessage({
+              content: `I think the answer to the problem is ${currAnswer}. This is my final answer`,
+              role: Role.User,
+            }),
+          );
+        setInProgress(false);
+    }
+
     return (
         <div className="mt-4 pt-4 space-y-2 bg-background p-4 rounded-md border">
             <h1 className="text-2xl font-bold">Problem</h1>
@@ -276,9 +293,16 @@ export function Problem() {
                 placeholder="Enter your answer..."
                 className="flex-1 mr-2 bg-muted text-muted-foreground rounded-md px-4 py-2"
             />
-            <Button type="button" disabled={!correctness} onClick={buttonClick}>
-                Next
-            </Button>
+            {
+                inProgress ?
+                <Button type="button" disabled={!correctness} onClick={buttonClick}>
+                    Next
+                </Button>
+            :
+                <Button type="button" disabled={!correctness} onClick={handleSubmit}>
+                    Submit
+                </Button>
+            }
             <h1 className="text-2xl font-bold">Explanation</h1>
             <Explanation explanation={currExplanation}></Explanation>
         </div>
