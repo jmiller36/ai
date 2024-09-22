@@ -105,15 +105,26 @@ export function Problem({problemStatus, setProblemStatus }) {
         }
     }
 
-    type Topic = 'addition' | 'subtraction' | 'multiplication' | 'division' | string | undefined;
+    type Topic = 'countries' | 'capitals' | 'landmarks' | 'rivers' | string | undefined;
     const getProblemFromQuestionBank = (topic: Topic) => {
+        alert("getting problem from question:" + topic);
         const questions = question_bank[topic];
-        for (let i = 0; i < questions.length; i++) {
-            if (questions[i]["question"] !== problem.question) {
-                return {...questions[i], topic: topic, userAnswer: ''};
-            }
+        
+        // Filter out the current problem from the questions
+        const filteredQuestions = questions.filter(question => question.question !== problem.question);
+
+        // If there are no remaining questions, return null
+        if (filteredQuestions.length === 0) {
+            return null;
         }
-    }
+
+        // Randomly select a question from the filtered questions
+        const randomIndex = Math.floor(Math.random() * filteredQuestions.length);
+        const selectedQuestion = filteredQuestions[randomIndex];
+
+        // Return the selected question with the topic and userAnswer properties
+        return { ...selectedQuestion, topic, userAnswer: '' };
+    };
 
     return (
         <>
