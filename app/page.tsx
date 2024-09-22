@@ -1,7 +1,7 @@
 "use client";
 
 import { TasksList } from "@/components/TasksList";
-import { TasksProvider } from "@/lib/hooks/use-tasks";
+import { AppProvider, TasksProvider } from "@/lib/hooks/use-tasks";
 import { CopilotKit } from "@copilotkit/react-core";
 import { CopilotPopup } from "@copilotkit/react-ui";
 import { Problem } from "@/components/Problem";
@@ -16,9 +16,9 @@ export default function Home() {
   return (
     <>
       <CopilotKit runtimeUrl="/api/copilotkit">
-        <TasksProvider>
-          <Problem problemStatus={problemStatus} setProblemStatus={setProblemStatus}/>
-        </TasksProvider>
+        <AppProvider>
+          <Problem/>
+        </AppProvider>
         <CopilotPopup />
       </CopilotKit>
     </>
