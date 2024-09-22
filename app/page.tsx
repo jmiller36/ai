@@ -26,9 +26,11 @@ export default function Home() {
       <CopilotKit runtimeUrl="/api/copilotkit">
         <AppProvider>
         {/* Conditionally render Problem or Teacher based on the route */}
-        {window.location.pathname === '/teacher' ? <Teacher /> : <Problem />}
-        <CopilotPopup />
+        {/* {window.location.pathname === '/teacher' ? <Teacher /> : <Problem />} */}
+        <Problem/>
+        <Teacher/>
         </AppProvider>
+        <CopilotPopup />
       </CopilotKit>}
     </>
   );

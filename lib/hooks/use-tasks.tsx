@@ -1,3 +1,4 @@
+'use client'
 import { useCopilotAction, useCopilotReadable } from "@copilotkit/react-core";
 import { createContext, useContext, useState, ReactNode } from "react";
 import { defaultTasks } from "../default-tasks";
@@ -221,7 +222,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     })
 
     // ADDING TO COPILOTACTIONS
-    /*useCopilotAction({
+    useCopilotAction({
         name: "createProblems",
         description: "Append to the current list with a new problems using the provided topics, number of questions, and the found answers. The topics should be equally represented in the problem set. The answers should be represented as strings.",
         parameters: [
@@ -252,7 +253,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         handler: ({ problems }) => {
             setAproblemSet(problems)
         }
-    });*/
+    });
     // useCopilotAction({
 
     // })
