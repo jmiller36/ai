@@ -260,14 +260,13 @@ export function Problem() {
 
     useCopilotAction({
         name: "generateProblem",
-        description: 'Generate new math problem in JSON format: {"topic": string, "question": string, "explanation": string, "answer": string, "userAnswer": string}',
+        description: 'Generates a new problem to replace current problem',
         parameters: [ 
             { name: "topic", type: "string", description: "The mathematical topic or subject area of the problem", required: true }, 
             { name: "question", type: "string", description: "The actual math problem or question to be solved", required: true }, 
-            { name: "explanation", type: "string", description: "An empty string", required: true }, 
             { name: "answer", type: "string", description: "The correct answer to the math problem", required: true }, 
         ],
-        handler: ({ topic, question, explanation, answer}) => {
+        handler: ({ topic, question, answer}) => {
             setCorrectness(false)
             setInProgress(true)
             currProblem.answer = answer
@@ -307,7 +306,7 @@ export function Problem() {
     const handleNext= () => {
         appendMessage(
             new TextMessage({
-              content: `I would like a new problem in ${currProblem.topic} generated in the format: {"topic": string, "question": string, "explanation": string, "answer": string, "userAnswer": string}`,
+              content: `I would like a new problem in ${currProblem.topic} generated in the format: {"topic": string, "question": string, "answer": string}`,
               role: Role.User,
             }),
           );
