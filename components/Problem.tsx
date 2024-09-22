@@ -98,25 +98,21 @@ export function Problem({problemStatus, setProblemStatus }) {
 
     const switchTopics = () => {
         const curTopic = problem.topic;
-        for (let topic in Object.keys(question_bank)) {
-            if (topic !== curTopic) {
-                return topic;
-            }
-        }
-    }
+        
+        // Filter out the current topic from the topics
+        const availableTopics = Object.keys(question_bank).filter(topic => topic !== curTopic);
+      
+        // Randomly select a new topic from the available options
+        const randomIndex = Math.floor(Math.random() * availableTopics.length);
+        return availableTopics[randomIndex];
+      };
 
     type Topic = 'countries' | 'capitals' | 'landmarks' | 'rivers' | string | undefined;
     const getProblemFromQuestionBank = (topic: Topic) => {
-        alert("getting problem from question:" + topic);
         const questions = question_bank[topic];
         
         // Filter out the current problem from the questions
         const filteredQuestions = questions.filter(question => question.question !== problem.question);
-
-        // If there are no remaining questions, return null
-        if (filteredQuestions.length === 0) {
-            return null;
-        }
 
         // Randomly select a question from the filtered questions
         const randomIndex = Math.floor(Math.random() * filteredQuestions.length);
