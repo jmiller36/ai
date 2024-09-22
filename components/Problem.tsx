@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { ProblemStatus as ProblemStatus, useApp, useTasks, type aProblem as aProblem } from "@/lib/hooks/use-tasks";
+import { useApp, useTasks, type aProblem as aProblem } from "@/lib/hooks/use-tasks";
 import React, { useEffect, useState } from 'react';
 import { question_bank } from "./resources/problems";
 import { CopilotTask, useCopilotContext, useCopilotReadable, useCopilotAction } from "@copilotkit/react-core";
 import { CopilotTextarea } from "@copilotkit/react-textarea";
+import { ProblemStatus } from "@/lib/problems.types";
 import {
     Container,
     Typography,

@@ -1,4 +1,5 @@
-import { aProblem, ProblemStatus } from "./hooks/use-tasks";
+import { aProblem } from "./hooks/use-tasks";
+import { ProblemStatus } from "./problems.types";
 
 export const defaultProblems: aProblem[] = [
     {
