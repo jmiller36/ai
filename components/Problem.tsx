@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { useTasks } from "@/lib/hooks/use-tasks";
 import React from 'react';
-import { question_bank } from "./resources/problems";
+//import { question_bank } from "./resources/problems";
+import { geography_question_bank } from "./resources/geography_questions";
 import { ProblemStatus, type Problem as ProblemType } from "@/lib/problems.types";
 import { CopilotTask, useCopilotContext } from "@copilotkit/react-core";
 import {
@@ -12,6 +13,8 @@ import {
 } from '@mui/material';
 
 export function Problem({problemStatus, setProblemStatus }) {
+    const question_bank = geography_question_bank;
+
     const { problem, setProblem } = useTasks();
     const [ userAnswer, setUserAnswer ] = React.useState<string>('');
     const problems: ProblemType[] = Object.entries(question_bank).flatMap(([topic, problems]) =>
