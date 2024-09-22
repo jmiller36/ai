@@ -74,7 +74,7 @@ export function Problem({problemStatus, setProblemStatus }) {
     });
 
     const handleSubmit = async () => {
-        alert(`userAnswer was passed in as: ${userAnswer}`);
+        //alert(`userAnswer was passed in as: ${userAnswer}`);
         //await evaluateAnswerTask.run(context, "updateProblemStatus");
         const isCorrect = problem.answer === userAnswer;
         isCorrect ? setProblemStatus(ProblemStatus.correct) : setProblemStatus(ProblemStatus.incorrect);
