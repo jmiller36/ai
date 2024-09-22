@@ -81,9 +81,35 @@ export function Problem({problemStatus, setProblemStatus }) {
        alert(problem.answer);
     };
 
-    const handleNext = async () => {
-        // TODO generate problem task run, choose next problem
-        await generateProblemTask.run(context, "generateProblem")
+    const handleNext = async (wasCorrect: boolean) => {
+        if (wasCorrect) {
+            const newTopic = switchTopics();
+            const newProblem: ProblemType = getProblemFromQuestionBank(newTopic);
+            setProblem(newProblem);
+            setProblemStatus(ProblemStatus.inProgress);
+        } else {
+            // TODO generate problem task run, choose next problem
+            await generateProblemTask.run(context, "generateProblem")
+        }
+    }
+
+    const switchTopics = () => {
+        const curTopic = problem.topic;
+        for (let topic in Object.keys(question_bank)) {
+            if (topic !== curTopic) {
+                return topic;
+            }
+        }
+    }
+
+    type Topic = 'addition' | 'subtraction' | 'multiplication' | 'division' | string | undefined;
+    const getProblemFromQuestionBank = (topic: Topic) => {
+        const questions = question_bank[topic];
+        for (let i = 0; i < questions.length; i++) {
+            if (questions[i]["question"] !== problem.question) {
+                return {...questions[i], topic: topic, userAnswer: ''};
+            }
+        }
     }
 
     return (
