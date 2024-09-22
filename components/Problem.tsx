@@ -39,6 +39,32 @@ export function Problem({problemStatus, setProblemStatus}) {
         ]
     });
 
+    const generateProblemTask = new CopilotTask({
+        instructions: "Generate a problem",
+        actions: [
+            {
+                name: "generateProblem",
+                description: "generate a follow-up problem",
+                argumentAnnotations: [
+                    {
+                        name: "message",
+                        type: "Problem",
+                        description:
+                        "A message to display.",
+                        required: true,
+                    },
+                ],
+                implementation: async (message) => {
+                    // ...
+                },
+            }
+        ]
+    });
+
+    const handleNext = async () => {
+        await generateProblemTask.run(context, generateProblem)
+    }
+
     const handleSubmit = async () => {
         alert(`userAnswer was passed in as: ${userAnswer}`);
     };
