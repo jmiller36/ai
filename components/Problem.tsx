@@ -5,6 +5,8 @@ import React from 'react';
 import { geography_question_bank } from "./resources/geography_questions";
 import { ProblemStatus, type Problem as ProblemType } from "@/lib/problems.types";
 import { CopilotTask, useCopilotContext } from "@copilotkit/react-core";
+import { useCopilotChat } from "@copilotkit/react-core";
+import { Role, TextMessage } from "@copilotkit/runtime-client-gql";
 import {
   Container,
   Typography,
@@ -13,6 +15,7 @@ import {
 } from '@mui/material';
 
 export function Problem({problemStatus, setProblemStatus }) {
+    const { appendMessage } = useCopilotChat();
     const question_bank = geography_question_bank;
 
     const { problem, setProblem } = useTasks();
@@ -78,6 +81,12 @@ export function Problem({problemStatus, setProblemStatus }) {
         //await evaluateAnswerTask.run(context, "updateProblemStatus");
         const isCorrect = problem.answer === userAnswer;
         isCorrect ? setProblemStatus(ProblemStatus.correct) : setProblemStatus(ProblemStatus.incorrect);
+        appendMessage(
+            new TextMessage({
+              content: `I think the answer to the problem is ${userAnswer}`,
+              role: Role.User,
+            }),
+          );
         setUserAnswer('');
     };
 
