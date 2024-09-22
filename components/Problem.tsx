@@ -317,6 +317,20 @@ export function Problem() {
     }
 
     const handleNext= () => {
+        // remove problem from quetion bank
+        setAproblemSet(aproblemSet.filter((problem) => problem.question !== currProblem.question));
+        
+        // choose next problem
+        const moreProblems = aproblemSet.length > 0;
+        if (moreProblems) {
+            const newProblem = aproblemSet[0];
+            setCorrectness(false)
+            setInProgress(true)
+            currProblem.answer = newProblem.answer;
+            currProblem.question = newProblem.question;
+            currProblem.topic = newProblem.topic;
+            return;
+        }
         appendMessage(
             new TextMessage({
               content: `I would like a new problem in ${currProblem.topic} generated in the format: {"topic": string, "question": string, "answer": string}`,
