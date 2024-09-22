@@ -16,16 +16,15 @@ import {
   Paper,
 } from '@mui/material';
 
-export function Problem({ problem: {problemText, explanation, answer, userAnswer, status}} : {problem: Problem}) {
+export function Problem({problemStatus, setProblemStatus}) {
     const { problem } = useTasks();
-    // const [ userAnswer, setUserAnswer ] = React.useState<string>('')
+    const [ userAnswer, setUserAnswer ] = React.useState<string>('');
     const problems: Problem[] = [
     
     ]
 
     const handleSubmit = () => {
         alert(`userAnswer was passed in as: ${userAnswer}`);
-        setUserAnswer(userAnswer)
     };
 
     return (
