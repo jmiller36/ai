@@ -7,17 +7,26 @@ import { CopilotPopup } from "@copilotkit/react-ui";
 import { Problem } from "@/components/Problem";
 import { Problem as ProblemType, ProblemStatus } from "@/lib/problems.types";
 import React from 'react';
+import Teacher from './Teacher';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import "@copilotkit/react-ui/styles.css";
 
 export default function Home() {
   return (
     <>
+      <Router>
       <CopilotKit runtimeUrl="/api/copilotkit">
         <AppProvider>
-          <Problem/>
+          <Switch>
+            <Route path="/teacher" component={Teacher} />
+            <Route path="/" exact>
+              <Problem /> {/* Default route to the Problem component */}
+            </Route>
+          </Switch>
         </AppProvider>
         <CopilotPopup />
       </CopilotKit>
+    </Router>
     </>
   );
 }
