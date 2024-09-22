@@ -262,9 +262,9 @@ export function Problem() {
         name: "generateProblem",
         description: 'Generates a new problem to replace current problem',
         parameters: [ 
-            { name: "topic", type: "string", description: "The mathematical topic or subject area of the problem", required: true }, 
-            { name: "question", type: "string", description: "The actual math problem or question to be solved", required: true }, 
-            { name: "answer", type: "string", description: "The correct answer to the math problem", required: true }, 
+            { name: "topic", type: "string", description: "The topic or subject area of the problem", required: true }, 
+            { name: "question", type: "string", description: "The actual problem or question to be solved", required: true }, 
+            { name: "answer", type: "string", description: "The correct answer to the problem", required: true }, 
         ],
         handler: ({ topic, question, answer}) => {
             setCorrectness(false)
