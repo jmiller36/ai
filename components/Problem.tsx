@@ -71,8 +71,14 @@ export function Problem({problemStatus, setProblemStatus }) {
     });
 
     const handleSubmit = async () => {
-        alert(`userAnswer was passed in as: ${userAnswer}`);
-        await evaluateAnswerTask.run(context, "updateProblemStatus");
+       //alert(`userAnswer was passed in as: ${userAnswer}`);
+    //    await evaluateAnswerTask.run(context, "updateProblemStatus");
+       if (userAnswer === problem.answer) {
+           setProblemStatus(ProblemStatus.correct)
+       } else {
+           setProblemStatus(ProblemStatus.incorrect)
+       }
+       alert(problem.answer);
     };
 
     const handleNext = async () => {
