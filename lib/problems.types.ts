@@ -7,7 +7,7 @@ export type Problem = {
   };
   
   export enum ProblemStatus {
-    todo = "todo",
+    inProgress = "inProgress",
     correct = "correct",
     incorrect = "incorrect"
   }
