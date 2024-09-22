@@ -14,18 +14,19 @@ const topics = [
 ];
 
 // Helper component to render each problem
-const Topic = ({ problems }) => {
+const Topic = ({ problem }) => {
   return (
     <motion.div
-      key={problems.id}
+      key={problem.id}
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 50 }}
       transition={{ duration: 0.3 }}
       className="p-2 bg-gray-100 rounded-md shadow-md"
     >
-      <p>{problems.question}</p>
-      <p><strong>Topic:</strong> {problems.topic}</p>
+      <p><strong>Question:</strong> {problem.question}</p>
+      <p><strong>Topic:</strong> {problem.topic}</p>
+      <p><strong>Answer:</strong> {problem.answer}</p>
     </motion.div>
   );
 };
@@ -41,7 +42,7 @@ export function Teacher() {
         <AnimatePresence>
           {aproblemSet // Iterate over the problems from aproblemSet
             .map((problem, index) => (
-              <Topic key={index} problems={problem} />
+              <Topic key={index} problem={problem} />
             ))}
         </AnimatePresence>
 
