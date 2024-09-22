@@ -295,12 +295,12 @@ export function Problem() {
             />
             {
                 inProgress ?
-                <Button type="button" disabled={!correctness} onClick={buttonClick}>
-                    Next
-                </Button>
-            :
                 <Button type="button" disabled={!correctness} onClick={handleSubmit}>
                     Submit
+                </Button>
+            :
+                <Button type="button" disabled={!correctness} onClick={buttonClick}>
+                    Next
                 </Button>
             }
             <h1 className="text-2xl font-bold">Explanation</h1>
