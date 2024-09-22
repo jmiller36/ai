@@ -116,30 +116,46 @@ export function Problem({problemStatus, setProblemStatus }) {
 
             {
                 problemStatus === ProblemStatus.correct ? 
-                <Container maxWidth="sm">
-                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px' }}>
-                    <Typography variant="h5" component="h2" gutterBottom>
-                    You got it right!
-                    </Typography>
-                    <Typography variant="body1" gutterBottom>
-                    {problem.explanation}
-                    </Typography>
+                <Container maxWidth="sm" style={{ display: 'flex', alignItems: 'flex-start' }}>
+                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px', flex: 1 }}>
+                        <Typography variant="h5" component="h2" gutterBottom>
+                            You got it right!
+                        </Typography>
+                        <Typography variant="body1" gutterBottom>
+                            {problem.explanation}
+                        </Typography>
                     </Paper>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        style={{ marginLeft: '16px', padding: '10px', backgroundColor: 'blue' }} // Custom blue color
+                        onClick={() => handleNext()} // Handle next button click
+                    >
+                        Next
+                    </Button>
                 </Container>
                 :
                 problemStatus === ProblemStatus.incorrect ?
-                <Container maxWidth="sm">
-                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px' }}>
-                    <Typography variant="h5" component="h2" gutterBottom>
-                    Incorrect
-                    </Typography>
-                    <Typography variant="h5" component="h2" gutterBottom>
-                    The answer was: {problem.answer}
-                    </Typography>
-                    <Typography variant="body1" gutterBottom>
-                    {problem.explanation}
-                    </Typography>
+                <Container maxWidth="sm" style={{ display: 'flex', alignItems: 'flex-start' }}>
+                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px', flex: 1 }}>
+                        <Typography variant="h5" component="h2" gutterBottom>
+                            Incorrect
+                        </Typography>
+                        <Typography variant="h5" component="h2" gutterBottom>
+                            The answer was: {problem.answer}
+                        </Typography>
+                        <Typography variant="body1" gutterBottom>
+                            {problem.explanation}
+                        </Typography>
                     </Paper>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        style={{ marginLeft: '16px', padding: '10px', backgroundColor: 'blue' }} // Custom blue color
+                        onClick={() => handleNext()} // Handle next button click
+                    >
+                        Next
+                    </Button>
                 </Container>
                 :
                 <></>
