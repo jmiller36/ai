@@ -7,7 +7,7 @@ import { CopilotPopup } from "@copilotkit/react-ui";
 import { Problem } from "@/components/Problem";
 import { Problem as ProblemType, ProblemStatus } from "@/lib/problems.types";
 import React from 'react';
-import Teacher from './Teacher';
+import Teacher from '@/components/Teacher';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import "@copilotkit/react-ui/styles.css";
 
