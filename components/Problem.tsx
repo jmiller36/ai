@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 
 export function Problem({problemStatus, setProblemStatus }) {
-    const [ problem, setProblem ] = React.useState<string>('');
+    const { problem, setProblem } = useTasks();
     const [ userAnswer, setUserAnswer ] = React.useState<string>('');
     const problems: ProblemType[] = Object.entries(question_bank).flatMap(([topic, problems]) =>
         problems.map(problem => ({
@@ -76,37 +76,66 @@ export function Problem({problemStatus, setProblemStatus }) {
     }
 
     return (
-        <Container maxWidth="sm">
-        <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px' }}>
-            <Typography variant="h5" component="h2" gutterBottom>
-            Problem Statement
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-            {problem.text}
-            </Typography>
+        <>
+            <Container maxWidth="sm">
+            <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px' }}>
+                <Typography variant="h5" component="h2" gutterBottom>
+                Problem Statement
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                {problem.text}
+                </Typography>
 
-            <TextField
-            variant="outlined"
-            multiline
-            rows={4}
-            placeholder="Write your answer here..."
-            fullWidth
-            value={userAnswer}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setUserAnswer(e.target.value)} // Explicit typing for e
-            style={{ marginBottom: '20px' }}
-            />
+                <TextField
+                variant="outlined"
+                multiline
+                rows={4}
+                placeholder="Write your answer here..."
+                fullWidth
+                value={userAnswer}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setUserAnswer(e.target.value)} // Explicit typing for e
+                style={{ marginBottom: '20px' }}
+                />
 
-            <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            style={{ padding: '10px' }}
-            onClick={() => handleSubmit()}
-            >
-            Submit
-            </Button>
-        </Paper>
-        </Container>
+                <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                style={{ padding: '10px' }}
+                onClick={() => handleSubmit()}
+                >
+                Submit
+                </Button>
+            </Paper>
+            </Container>
+            {
+                problemStatus === ProblemStatus.correct ? 
+                <Container maxWidth="sm">
+                    <Typography variant="h5" component="h2" gutterBottom>
+                    You got it right!
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                    {problem.explanation}
+                    </Typography>
+                </Container>
+                :
+                problemStatus === ProblemStatus.incorrect ?
+                <Container maxWidth="sm">
+                    <Typography variant="h5" component="h2" gutterBottom>
+                    Incorrect
+                    </Typography>
+                    <Typography variant="h5" component="h2" gutterBottom>
+                    The answer was: {problem.answer}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                    {problem.explanation}
+                    </Typography>
+                </Container>
+                :
+                <></>
+            }
+        </>
+        
     );
 };
 
