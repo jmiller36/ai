@@ -31,6 +31,7 @@ const Topic = ({ problem }) => {
   );
 };
 
+// prompt: "can you append 5 more questions like whats on the page"
 export function Teacher() {
   const { aproblemSet } = useApp(); // Access aproblemSet from context
 
