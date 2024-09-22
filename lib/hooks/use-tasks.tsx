@@ -221,7 +221,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     })
 
     // ADDING TO COPILOTACTIONS
-    useCopilotAction({
+    /*useCopilotAction({
         name: "createProblems",
         description: "Generates a new list of problems using the provided topics, number of questions, and the found answers. The topics should be equally represented in the problem set. The answers should be represented as strings.",
         parameters: [
@@ -252,7 +252,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         handler: ({ problems }) => {
             setAproblemSet(problems)
         }
-    });
+    });*/
     // useCopilotAction({
 
     // })
