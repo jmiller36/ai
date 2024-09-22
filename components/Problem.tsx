@@ -78,6 +78,7 @@ export function Problem({problemStatus, setProblemStatus }) {
         //await evaluateAnswerTask.run(context, "updateProblemStatus");
         const isCorrect = problem.answer === userAnswer;
         isCorrect ? setProblemStatus(ProblemStatus.correct) : setProblemStatus(ProblemStatus.incorrect);
+        setUserAnswer('');
     };
 
     const handleNext = async (wasCorrect: boolean) => {
