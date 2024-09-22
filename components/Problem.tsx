@@ -19,10 +19,14 @@ export function Problem({problemStatus, setProblemStatus }) {
             ...problem,
             topic,
             userAnswer: '',
-            status: 'todo'
+            status: ProblemStatus.inProgress
         }))
     );
     console.log(problems[0]);
+
+    React.useEffect(
+        () => setProblem(problems[0])
+    );
     
     const context = useCopilotContext();
     const evaluateAnswerTask = new CopilotTask({
