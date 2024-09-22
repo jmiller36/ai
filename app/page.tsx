@@ -10,9 +10,6 @@ import React from 'react';
 import "@copilotkit/react-ui/styles.css";
 
 export default function Home() {
-  const COPILOT_CLOUD_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_COPILOT_CLOUD_PUBLIC_API_KEY;
-  const [ problemStatus, setProblemStatus ] = React.useState(ProblemStatus.inProgress);
-
   return (
     <>
       <CopilotKit runtimeUrl="/api/copilotkit">
