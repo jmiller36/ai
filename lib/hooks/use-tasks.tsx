@@ -47,6 +47,28 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     handler: ({ problemText, explanation, answer}) => {
       addProblem(problemText, explanation, answer);
     }
+  });
+
+  useCopilotAction({
+    name: "evaluateAnswer",
+    description: "Evaluates whether the user's answer to the problem is correct, and returns true if it is correct, and false otherwise",
+    parameters: [
+      {
+        name: "problem",
+        type: "object",
+        description: "The problem that the user submitted an answer to. It is an object of type Problem, which has a problemText, explanation, and answer",
+        required: true
+      },
+      {
+        name: "userAnswer",
+        type: "string",
+        description: "The user's answer to the problem.",
+        required: true
+      }
+    ],
+    handler: ({ problem, userAnswer }) => {
+      evaluateAnswer(problem, userAnswer);
+    }
   })
 
   useCopilotReadable({
@@ -128,6 +150,10 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   const addProblem = (problemText: string, explanation: string, answer: string, status: ProblemStatus) => {
     setProblem({problemText: problemText, explanation: explanation, answer: answer, status: status});
     alert(`addProblem called with problem ${problemText}`);
+  }
+
+  const evaluateAnswer = (problem: Problem, userAnswer: string) => {
+    return true;
   }
 
   // const evaluate = (problem: string, answer: string) => {
