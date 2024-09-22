@@ -1,14 +1,8 @@
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { TrashIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useTasks } from "@/lib/hooks/use-tasks";
-import { motion } from "framer-motion";
-import { TaskStatus, type Task } from "@/lib/tasks.types";
 import React from 'react';
 import { question_bank } from "./resources/problems";
-import { ProblemStatus, type Problem } from "@/lib/problems.types";
+import { type Problem } from "@/lib/problems.types";
 import {
   Container,
   Typography,
@@ -20,7 +14,7 @@ export function Problem({problemStatus, setProblemStatus}) {
     const { problem } = useTasks();
     const [ userAnswer, setUserAnswer ] = React.useState<string>('');
     const problems: Problem[] = [
-    
+
     ]
 
     const handleSubmit = () => {
@@ -60,6 +54,6 @@ export function Problem({problemStatus, setProblemStatus}) {
         </Paper>
         </Container>
     );
-    };
+};
 
-    export default Problem;
+export default Problem;
