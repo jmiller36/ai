@@ -30,24 +30,26 @@ export function Problem({problemStatus, setProblemStatus }) {
     
     const context = useCopilotContext();
     const evaluateAnswerTask = new CopilotTask({
-        instructions: "Evaluate whether the user's answer to the problem, stored in userAnswer, is correct. Set the value of problemStatus to ProblemStatus.correct using setProblemStatus(ProblemStatus.correct) if the answer is correct, and ProblemStatus.incorrect using setProblemStatus(ProblemStatus.incorrect) if it is incorrect.",
+        instructions: "Evaluate whether the user's answer to the problem is correct. Consider the problem details and the user's answer to determine if it's correct.",
         actions: [
             {
-                name: "updateProblemStatus",
-                description: "set the problem status based on whether the answer is correct or incorrect",
+                name: "evaluateAnswer",
+                description: "Evaluate if the user's answer is correct",
                 argumentAnnotations: [
                     {
                         name: "isCorrect",
                         description: "true if the answer to the problem is correct, and false otherwise",
                         type: "boolean",
                         required: true
-                    }],
+                    }
+                ],
                 implementation: async (isCorrect: boolean) => {
                     isCorrect ? setProblemStatus(ProblemStatus.correct) : setProblemStatus(ProblemStatus.incorrect);
                 }
             }
         ]
     });
+    
 
     const generateProblemTask = new CopilotTask({
         instructions: "Generate a follow-up problem",
@@ -64,7 +66,8 @@ export function Problem({problemStatus, setProblemStatus }) {
                     },
                 ],
                 implementation: async (generatedProblem: ProblemType) => {
-                    setProblem(generatedProblem)
+                    // Here, generatedProblem is the output from the AI
+                    setProblem(generatedProblem);
                 },
             }
         ]
@@ -72,7 +75,7 @@ export function Problem({problemStatus, setProblemStatus }) {
 
     const handleSubmit = async () => {
         alert(`userAnswer was passed in as: ${userAnswer}`);
-        await evaluateAnswerTask.run(context, "updateProblemStatus");
+        await evaluateAnswerTask.run(useCopilotContext(), "updateProblemStatus");
     };
 
     const handleNext = async (wasCorrect: boolean) => {
