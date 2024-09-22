@@ -295,7 +295,7 @@ export function Problem() {
             />
             {
                 inProgress ?
-                <Button type="button" disabled={!correctness} onClick={handleSubmit}>
+                <Button type="button" onClick={handleSubmit}>
                     Submit
                 </Button>
             :
