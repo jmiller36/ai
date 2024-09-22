@@ -1,3 +1,4 @@
+'use client'
 import { useCopilotAction, useCopilotReadable } from "@copilotkit/react-core";
 import { createContext, useContext, useState, ReactNode } from "react";
 import { defaultTasks } from "../default-tasks";

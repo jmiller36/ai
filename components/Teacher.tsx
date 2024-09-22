@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { useApp } from "@/lib/hooks/use-tasks"; // Import the hook for context access
 import { AnimatePresence, motion } from 'framer-motion'; // Assuming you're using framer-motion for animations
