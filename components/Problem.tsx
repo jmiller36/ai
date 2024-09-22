@@ -128,7 +128,7 @@ export function Problem({problemStatus, setProblemStatus }) {
                     <Button
                         variant="contained"
                         color="primary"
-                        style={{ marginLeft: '16px', padding: '10px', backgroundColor: 'blue' }} // Custom blue color
+                        style={{ marginLeft: '16px', padding: '10px', backgroundColor: 'blue', color: 'white' }}
                         onClick={() => handleNext()} // Handle next button click
                     >
                         Next
@@ -151,7 +151,7 @@ export function Problem({problemStatus, setProblemStatus }) {
                     <Button
                         variant="contained"
                         color="primary"
-                        style={{ marginLeft: '16px', padding: '10px', backgroundColor: 'blue' }} // Custom blue color
+                        style={{ marginLeft: '16px', padding: '10px', backgroundColor: 'blue', color: 'white' }}
                         onClick={() => handleNext()} // Handle next button click
                     >
                         Next
