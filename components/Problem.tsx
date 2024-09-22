@@ -12,12 +12,11 @@ import {
 } from '@mui/material';
 
 export function Problem({problemStatus, setProblemStatus }) {
-    const { problem } = useTasks();
+    const [ problem, setProblem ] = React.useState<string>('');
     const [ userAnswer, setUserAnswer ] = React.useState<string>('');
-    const problems: Problem[] = [
+    const problems: ProblemType[] = [
 
     ]
-
     const context = useCopilotContext();
     const evaluateAnswerTask = new CopilotTask({
         instructions: "Evaluate whether the user's answer to the problem, stored in userAnswer, is correct. Set the value of problemStatus to ProblemStatus.correct using setProblemStatus(ProblemStatus.correct) if the answer is correct, and ProblemStatus.incorrect using setProblemStatus(ProblemStatus.incorrect) if it is incorrect.",
@@ -40,30 +39,25 @@ export function Problem({problemStatus, setProblemStatus }) {
     });
 
     const generateProblemTask = new CopilotTask({
-        instructions: "Generate a problem",
+        instructions: "Generate a follow-up problem",
         actions: [
             {
                 name: "generateProblem",
                 description: "generate a follow-up problem",
                 argumentAnnotations: [
                     {
-                        name: "message",
+                        name: "nextProblem",
                         type: "Problem",
-                        description:
-                        "A message to display.",
+                        description: "The follow-up problem that will be asked next.",
                         required: true,
                     },
                 ],
-                implementation: async (message) => {
-                    // ...
+                implementation: async (nextProblem: ProblemType) => {
+                    setProblem(nextProblem)
                 },
             }
         ]
     });
-
-    const handleNext = async () => {
-        await generateProblemTask.run(context, generateProblem)
-    }
 
     const handleSubmit = async () => {
         alert(`userAnswer was passed in as: ${userAnswer}`);
@@ -72,6 +66,7 @@ export function Problem({problemStatus, setProblemStatus }) {
 
     const handleNext = async () => {
         // TODO generate problem task run, choose next problem
+        await generateProblemTask.run(context, "generateProblem")
     }
 
     return (
