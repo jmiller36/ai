@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { TaskStatus, type Task } from "@/lib/tasks.types";
 import React from 'react';
 import { question_bank } from "./resources/problems";
+import { ProblemStatus, type Problem } from "@/lib/problems.types";
 import {
   Container,
   Typography,
@@ -15,9 +16,12 @@ import {
   Paper,
 } from '@mui/material';
 
-export const Problem = () => {
+export function Problem({ problem: {problemText, explanation, answer, userAnswer, status}} : {problem: Problem}) {
     const { problem } = useTasks();
-    const [ userAnswer, setUserAnswer ] = React.useState<string>('')
+    // const [ userAnswer, setUserAnswer ] = React.useState<string>('')
+    const problems: Problem[] = [
+    
+    ]
 
     const handleSubmit = () => {
         alert(`userAnswer was passed in as: ${userAnswer}`);
