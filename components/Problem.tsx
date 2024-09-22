@@ -28,7 +28,7 @@ export function Problem({problemStatus, setProblemStatus}) {
             Problem Statement
             </Typography>
             <Typography variant="body1" gutterBottom>
-            {problem.problemText}
+            {problem.text}
             </Typography>
 
             <TextField
