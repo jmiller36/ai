@@ -299,7 +299,7 @@ export function Problem() {
                     Submit
                 </Button>
             :
-                <Button type="button" disabled={!correctness} onClick={buttonClick}>
+                <Button type="button" onClick={buttonClick}>
                     Next
                 </Button>
             }
