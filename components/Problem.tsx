@@ -19,6 +19,7 @@ export const Problem = () => {
     const [ userAnswer, setUserAnswer ] = React.useState<string>('')
 
     const handleSubmit = () => {
+        alert(`userAnswer was passed in as: ${userAnswer}`);
         setUserAnswer(userAnswer)
     };
 
@@ -38,6 +39,8 @@ export const Problem = () => {
             rows={4}
             placeholder="Write your answer here..."
             fullWidth
+            value={userAnswer}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setUserAnswer(e.target.value)} // Explicit typing for e
             style={{ marginBottom: '20px' }}
             />
 
