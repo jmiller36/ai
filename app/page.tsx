@@ -17,7 +17,7 @@ export default function Home() {
 
   React.useEffect(() => {
     setIsMounted(true);
-  }, []);
+  });
 
   return (
     <>
