@@ -13,22 +13,23 @@ import Link from 'next/link';
 import "@copilotkit/react-ui/styles.css";
 
 export default function Home() {
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <>
-      <Router>
+      {
+        isMounted && 
       <CopilotKit runtimeUrl="/api/copilotkit">
         <AppProvider>
-        <nav>
-          <Link href="/">Home</Link>
-          <Link href="/student">Student</Link>
-          <Link href="/teacher">Teacher</Link>
-        </nav>
-        {/* Default component for home route */}
-        <Problem />
+        {/* Conditionally render Problem or Teacher based on the route */}
+        {window.location.pathname === '/teacher' ? <Teacher /> : <Problem />}
         </AppProvider>
         <CopilotPopup />
-      </CopilotKit>
-    </Router>
+      </CopilotKit>}
     </>
   );
 }
