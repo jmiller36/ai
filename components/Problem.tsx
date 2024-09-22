@@ -7,6 +7,7 @@ import { useTasks } from "@/lib/hooks/use-tasks";
 import { motion } from "framer-motion";
 import { TaskStatus, type Task } from "@/lib/tasks.types";
 import React from 'react';
+import { question_bank } from "./resources/problems";
 import {
   Container,
   Typography,
