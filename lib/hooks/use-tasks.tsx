@@ -11,6 +11,7 @@ type TasksContextType = {
   tasks: Task[];
   addProblem: (problemText: string, explanation: string, answer: string, status: ProblemStatus) => void;
   addTask: (title: string) => void;
+  setProblem: (explanation: string, answer: string, status: ProblemStatus) => void;
   setTaskStatus: (id: number, status: TaskStatus) => void;
   deleteTask: (id: number) => void;
 };
@@ -45,7 +46,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
       }
     ],
     handler: ({ problemText, explanation, answer}) => {
-      addProblem(problemText, explanation, answer);
+      addProblem(problemText, explanation, answer, ProblemStatus.todo);
     }
   });
 
@@ -109,7 +110,7 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   });
 
   // useCopilotAction({
-  //   name: "evaluate",
+  //   name: "evaluateAnswer",
   //   description: "Evaluate the answer to the current problem",
   //   parameters: [
   //     {
@@ -158,6 +159,8 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
 
   // const evaluate = (problem: string, answer: string) => {
   //   setAnswer()
+  // const evaluate = (answer: string) => {
+  //   setProblem({explanation: explanation, answer: answer, status: status});
   //   setTasks(tasks.filter((task) => task.id !== id));
   // };
 
@@ -175,6 +178,10 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
 
   const deleteTask = (id: number) => {
     setTasks(tasks.filter((task) => task.id !== id));
+  };
+
+  const setUserAnswer = () => { // TO-DO
+    
   };
   
   return (

@@ -2,6 +2,7 @@ export type Problem = {
     problemText: string,
     explanation: string,
     answer: string,
+    userAnswer: string,
     status: ProblemStatus
   };
   
