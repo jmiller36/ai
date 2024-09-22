@@ -202,6 +202,7 @@ import { Input } from "./ui/input";
 
 //     );
 // };
+
 export function Problem() {
     const { currProblem, setCurrProblem } = useApp();
     const { aproblemSet, setAproblemSet } = useApp();
@@ -257,6 +258,34 @@ export function Problem() {
         }
     })
 
+    useCopilotAction({
+        name: "generateProblem",
+        description: 'Generate new math problem in JSON format: {"topic": string, "question": string, "explanation": string, "answer": string, "userAnswer": string}',
+        parameters: [ 
+            { name: "topic", type: "string", description: "The mathematical topic or subject area of the problem", required: true }, 
+            { name: "question", type: "string", description: "The actual math problem or question to be solved", required: true }, 
+            { name: "explanation", type: "string", description: "An empty string", required: true }, 
+            { name: "answer", type: "string", description: "The correct answer to the math problem", required: true }, 
+        ],
+        handler: ({ topic, question, explanation, answer}) => {
+            setCorrectness(false)
+            setInProgress(true)
+            currProblem.answer = answer
+            currProblem.question = question
+            currProblem.topic = topic
+        }
+    })
+
+    // const buttonClick = () => {
+    //     setCorrectness(false)
+    //     setInProgress(true);
+    //     if (aproblemSet && aproblemSet.length > 0) {
+    //         aproblemSet.shift()
+    //         setCurrProblem(aproblemSet[0])
+    //     }
+    //     setAproblemSet(aproblemSet)
+    // }
+
     const evaluateAnswer = (correctness: boolean, description: string) => {
         if (!correctness) {
             setCurrExplanation(description)
@@ -273,6 +302,16 @@ export function Problem() {
             }),
           );
         setInProgress(false);
+    }
+
+    const handleNext= () => {
+        appendMessage(
+            new TextMessage({
+              content: `I would like a new problem in ${currProblem.topic} generated in the format: {"topic": string, "question": string, "explanation": string, "answer": string, "userAnswer": string}`,
+              role: Role.User,
+            }),
+          );
+        setInProgress(true);
     }
 
     return (
@@ -299,7 +338,7 @@ export function Problem() {
                     Submit
                 </Button>
             :
-                <Button type="button" onClick={buttonClick}>
+                <Button type="button" onClick={handleNext}>
                     Next
                 </Button>
             }
