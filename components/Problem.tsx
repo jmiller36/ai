@@ -248,7 +248,7 @@ export function Problem() {
             {
                 name: "description",
                 type: "string",
-                description: "The problem topic name and a hint on how to solve the problem",
+                description: "The problem topic name and a hint on how to solve the problem. Do not provide the final answer, only hint to help the student solve the problem on their own. Keep your answers concise and under 200 words.",
                 required: true
             }
         ],
