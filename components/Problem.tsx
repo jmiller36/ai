@@ -266,12 +266,11 @@ export function Problem() {
             { name: "question", type: "string", description: "The actual math problem or question to be solved", required: true }, 
             { name: "explanation", type: "string", description: "An empty string", required: true }, 
             { name: "answer", type: "string", description: "The correct answer to the math problem", required: true }, 
-            { name: "userAnswer", type: "string", description: "An empty string", required: true } 
         ],
-        handler: ({ topic, question, explanation, answer, userAnswer }) => {
+        handler: ({ topic, question, explanation, answer}) => {
             setCorrectness(false)
             setInProgress(true)
-            currProblem.answer = userAnswer
+            currProblem.answer = answer
             currProblem.question = question
             currProblem.topic = topic
         }
