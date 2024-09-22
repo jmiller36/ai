@@ -302,7 +302,6 @@ export function Problem() {
             answer: currProblem.answer,
             status: updatedStatus
         }
-        alert(updatedStatus);
         setCurrProblem(updatedProblem)
     }
 
