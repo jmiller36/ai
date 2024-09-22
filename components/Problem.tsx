@@ -29,7 +29,7 @@ export function Problem({ problem: {problemText, explanation, answer, userAnswer
     };
 
     return (
-        <Container maxWidth="sm" className="flex items-center gap-4 p-2 rounded-md bg-muted">
+        <Container maxWidth="sm">
         <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px' }}>
             <Typography variant="h5" component="h2" gutterBottom>
             Problem Statement
