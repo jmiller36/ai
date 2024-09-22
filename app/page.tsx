@@ -9,6 +9,7 @@ import { Problem as ProblemType, ProblemStatus } from "@/lib/problems.types";
 import React from 'react';
 import Teacher from '@/components/Teacher';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Link from 'next/link';
 import "@copilotkit/react-ui/styles.css";
 
 export default function Home() {
@@ -17,11 +18,13 @@ export default function Home() {
       <Router>
       <CopilotKit runtimeUrl="/api/copilotkit">
         <AppProvider>
-          <Routes>
-            <Route path="/student" element={<Problem />} />
-            <Route path="/teacher" element={<Teacher />} />
-            <Route path="/" element={<Problem />} /> {/* Default route to the Problem component */}
-          </Routes>
+        <nav>
+          <Link href="/">Home</Link>
+          <Link href="/student">Student</Link>
+          <Link href="/teacher">Teacher</Link>
+        </nav>
+        {/* Default component for home route */}
+        <Problem />
         </AppProvider>
         <CopilotPopup />
       </CopilotKit>
