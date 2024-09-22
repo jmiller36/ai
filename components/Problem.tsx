@@ -116,20 +116,20 @@ export function Problem({problemStatus, setProblemStatus }) {
 
             {
                 problemStatus === ProblemStatus.correct ? 
-                <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px' }}>
                 <Container maxWidth="sm">
+                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px' }}>
                     <Typography variant="h5" component="h2" gutterBottom>
                     You got it right!
                     </Typography>
                     <Typography variant="body1" gutterBottom>
                     {problem.explanation}
                     </Typography>
+                    </Paper>
                 </Container>
-                </Paper>
                 :
                 problemStatus === ProblemStatus.incorrect ?
-                <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px' }}>
                 <Container maxWidth="sm">
+                    <Paper elevation={3} style={{ padding: '20px', borderRadius: '8px' }}>
                     <Typography variant="h5" component="h2" gutterBottom>
                     Incorrect
                     </Typography>
@@ -139,8 +139,8 @@ export function Problem({problemStatus, setProblemStatus }) {
                     <Typography variant="body1" gutterBottom>
                     {problem.explanation}
                     </Typography>
+                    </Paper>
                 </Container>
-                </Paper>
                 :
                 <></>
             }
