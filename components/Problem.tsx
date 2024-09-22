@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useTasks } from "@/lib/hooks/use-tasks";
 import React from 'react';
 import { question_bank } from "./resources/problems";
-import { ProblemStatus, type Problem } from "@/lib/problems.types";
+import { ProblemStatus, type Problem as ProblemType } from "@/lib/problems.types";
 import { CopilotTask, useCopilotContext } from "@copilotkit/react-core";
 import {
   Container,
@@ -11,7 +11,7 @@ import {
   Paper,
 } from '@mui/material';
 
-export function Problem({problemStatus, setProblemStatus}) {
+export function Problem({problemStatus, setProblemStatus }) {
     const { problem } = useTasks();
     const [ userAnswer, setUserAnswer ] = React.useState<string>('');
     const problems: Problem[] = [
@@ -41,7 +41,12 @@ export function Problem({problemStatus, setProblemStatus}) {
 
     const handleSubmit = async () => {
         alert(`userAnswer was passed in as: ${userAnswer}`);
+        await evaluateAnswerTask.run(context, "updateProblemStatus");
     };
+
+    const handleNext = async () => {
+        // TODO generate problem task run, choose next problem
+    }
 
     return (
         <Container maxWidth="sm">
